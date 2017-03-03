@@ -30,8 +30,9 @@ class TabBarController: UITabBarController {
     }
     
     @IBAction func postLocationPressed(_ sender: Any) {
-        let navigationController = storyboard?.instantiateViewController(withIdentifier: "MakePostNavigationController") as! UINavigationController
-        present(navigationController, animated: true, completion: nil)
+        let myNavigationController = storyboard?.instantiateViewController(withIdentifier: "MakePostNavigationController") as! UINavigationController
+        let controller = myNavigationController.topViewController as! MakePostViewController
+        navigationController?.pushViewController(controller, animated: true)
     }
     
 

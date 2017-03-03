@@ -167,7 +167,7 @@
                                 <rect key="frame" x="0.0" y="28" width="375" height="70"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="rbF-sn-4vm" id="CvL-jw-vWW">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="69"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="69.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jMv-u9-rgm">
@@ -287,6 +287,10 @@
                                         <real key="value" value="4"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="findLocationPressed:" destination="bZD-Ml-lGb" eventType="touchUpInside" id="80X-Nd-EFb"/>
+                                    <segue destination="eyh-AL-4rF" kind="show" id="fja-rH-Ndp"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -308,10 +312,52 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="locationTextField" destination="tnW-7G-IrB" id="4F1-PM-2zQ"/>
+                        <outlet property="mediaTextField" destination="Wa8-GF-632" id="MSc-Sq-5Mu"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jzb-zY-l8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2437.5999999999999" y="-780.35982008995506"/>
+        </scene>
+        <!--Add Location-->
+        <scene sceneID="Yuh-xe-M2c">
+            <objects>
+                <viewController title="Add Location" id="eyh-AL-4rF" customClass="UserPostMapViewController" customModule="OnTheMapReloaded" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="RAj-Gl-SQT"/>
+                        <viewControllerLayoutGuide type="bottom" id="23i-Tc-AKS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="hAL-4C-yWX">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wrx-ba-0f9">
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iK1-sR-Hbz">
+                                <rect key="frame" x="16" y="607" width="343" height="40"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.015686274510000001" green="0.66274509800000003" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="16"/>
+                                <state key="normal" title="FINISH">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                </state>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="23i-Tc-AKS" firstAttribute="top" secondItem="wrx-ba-0f9" secondAttribute="bottom" id="NGv-Cj-qfU"/>
+                            <constraint firstAttribute="trailing" secondItem="wrx-ba-0f9" secondAttribute="trailing" id="PWf-5C-IJY"/>
+                            <constraint firstItem="wrx-ba-0f9" firstAttribute="top" secondItem="RAj-Gl-SQT" secondAttribute="bottom" id="sQw-td-iAW"/>
+                            <constraint firstItem="wrx-ba-0f9" firstAttribute="leading" secondItem="hAL-4C-yWX" secondAttribute="leading" id="z0v-yh-lyz"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="XJ0-9U-7ih" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="3149.5999999999999" y="-780.35982008995506"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="4xy-zZ-DXI">
@@ -362,7 +408,7 @@
                         <rightBarButtonItems>
                             <barButtonItem image="icon_addpin" id="3qb-O4-uA5">
                                 <connections>
-                                    <action selector="postLocationPressed:" destination="Btv-qw-0p0" id="XfU-Vg-Heb"/>
+                                    <action selector="postLocationPressed:" destination="Btv-qw-0p0" id="S6C-hx-huG"/>
                                 </connections>
                             </barButtonItem>
                             <barButtonItem image="icon_refresh" id="93L-uf-63Z">
@@ -411,6 +457,7 @@
             <objects>
                 <navigationController storyboardIdentifier="MakePostNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="dS7-hq-7t7" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="xAl-t4-KYD"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="V0H-HX-15H">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>

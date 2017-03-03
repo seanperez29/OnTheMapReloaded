@@ -10,13 +10,22 @@ import UIKit
 
 class MakePostViewController: UIViewController {
 
+    @IBOutlet weak var locationTextField: CustomTextField!
+    @IBOutlet weak var mediaTextField: CustomTextField!
+    
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
     }
     
+    @IBAction func findLocationPressed(_ sender: Any) {
+    }
+    
+    
     @IBAction func cancelPressed(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+        let _ = navigationController?.popToRootViewController(animated: true)
     }
 
 }

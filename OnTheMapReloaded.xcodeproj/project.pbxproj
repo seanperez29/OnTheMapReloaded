@@ -16,6 +16,7 @@
 		911891BC1E67822F00B578C6 /* UdacityConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911891BB1E67822F00B578C6 /* UdacityConstants.swift */; };
 		911891BE1E67833500B578C6 /* ParseConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911891BD1E67833500B578C6 /* ParseConstants.swift */; };
 		911891C01E678F8C00B578C6 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911891BF1E678F8C00B578C6 /* TabBarController.swift */; };
+		91191DFE1E6A08C600D9B791 /* UserPostMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91191DFD1E6A08C600D9B791 /* UserPostMapViewController.swift */; };
 		911BA3131E690A4A00CBEBCC /* StudentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911BA3121E690A4A00CBEBCC /* StudentCell.swift */; };
 		911BA3151E6922D900CBEBCC /* MakePostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911BA3141E6922D900CBEBCC /* MakePostViewController.swift */; };
 		911BA3171E6926BA00CBEBCC /* CustomTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 911BA3161E6926BA00CBEBCC /* CustomTextField.swift */; };
@@ -40,6 +41,7 @@
 		911891BB1E67822F00B578C6 /* UdacityConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UdacityConstants.swift; sourceTree = "<group>"; };
 		911891BD1E67833500B578C6 /* ParseConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseConstants.swift; sourceTree = "<group>"; };
 		911891BF1E678F8C00B578C6 /* TabBarController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
+		91191DFD1E6A08C600D9B791 /* UserPostMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserPostMapViewController.swift; sourceTree = "<group>"; };
 		911BA3121E690A4A00CBEBCC /* StudentCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StudentCell.swift; sourceTree = "<group>"; };
 		911BA3141E6922D900CBEBCC /* MakePostViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MakePostViewController.swift; sourceTree = "<group>"; };
 		911BA3161E6926BA00CBEBCC /* CustomTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTextField.swift; sourceTree = "<group>"; };
@@ -107,6 +109,7 @@
 				9146F0F91E679D8000DDFFAA /* MapViewController.swift */,
 				9146F0FB1E679DAF00DDFFAA /* TableViewController.swift */,
 				911BA3141E6922D900CBEBCC /* MakePostViewController.swift */,
+				91191DFD1E6A08C600D9B791 /* UserPostMapViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -239,6 +242,7 @@
 				911BA3131E690A4A00CBEBCC /* StudentCell.swift in Sources */,
 				911891C01E678F8C00B578C6 /* TabBarController.swift in Sources */,
 				9146F1001E67A56800DDFFAA /* GCDBlackBox.swift in Sources */,
+				91191DFE1E6A08C600D9B791 /* UserPostMapViewController.swift in Sources */,
 				911891B41E677FE600B578C6 /* UdacityClient.swift in Sources */,
 				9146F0FE1E67A02400DDFFAA /* Student.swift in Sources */,
 				911BA3171E6926BA00CBEBCC /* CustomTextField.swift in Sources */,
