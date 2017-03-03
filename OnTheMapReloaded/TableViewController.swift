@@ -57,7 +57,8 @@ extension TableViewController {
         }
         if UIApplication.shared.canOpenURL(url) {
             UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        } else {
+            UdacityClient.sharedInstance.displayErrorAlert(self, title: "Invalid URL: Unable to Open")
         }
-        
     }
 }

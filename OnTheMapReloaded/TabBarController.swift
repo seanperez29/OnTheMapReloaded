@@ -10,6 +10,29 @@ import UIKit
 
 class TabBarController: UITabBarController {
 
+    @IBAction func refreshStudentPosts(_ sender: Any) {
+        NotificationCenter.default.post(name: Notification.Name(rawValue: "reloadData"), object: nil)
+    }
+    
+    @IBAction func logoutPressed(_ sender: Any) {
+        UdacityClient.sharedInstance.taskForLogout { (success, error) in
+            if success {
+                performUIUpdatesOnMain {
+                    self.dismiss(animated: true, completion: nil)
+                }
+            } else {
+                performUIUpdatesOnMain {
+                    UdacityClient.sharedInstance.displayErrorAlert(self, title: "Unable to perform logout. Please try again.")
+                }
+            }
+        }
+        
+    }
+    
+    @IBAction func postLocationPressed(_ sender: Any) {
+        let navigationController = storyboard?.instantiateViewController(withIdentifier: "MakePostNavigationController") as! UINavigationController
+        present(navigationController, animated: true, completion: nil)
+    }
     
 
 }

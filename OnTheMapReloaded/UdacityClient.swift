@@ -18,6 +18,40 @@ class UdacityClient: NSObject {
     var lastName: String?
     var uniqueID: String?
     
+    func taskForLogout(_ completionHandlerForLogout: @escaping (_ success: Bool, _ errorString: NSError?) -> Void) {
+        let request = NSMutableURLRequest(url: URL(string: UdacityClient.Constants.APIBaseURL)!)
+        request.httpMethod = "DELETE"
+        var xsrfCookie: HTTPCookie? = nil
+        let sharedCookieStorage = HTTPCookieStorage.shared
+        for cookie in sharedCookieStorage.cookies! {
+            if cookie.name == "XSRF-TOKEN" { xsrfCookie = cookie }
+        }
+        if let xsrfCookie = xsrfCookie {
+            request.setValue(xsrfCookie.value, forHTTPHeaderField: "X-XSRF-TOKEN")
+        }
+        let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
+            func sendError(_ error: String) {
+                let userInfo = [NSLocalizedDescriptionKey: error]
+                completionHandlerForLogout(false, NSError(domain: "taskForLogout", code: 0, userInfo: userInfo))
+            }
+            guard (error == nil) else {
+                sendError("There was an error with your request: \(error)")
+                return
+            }
+            guard let statusCode = (response as? HTTPURLResponse)?.statusCode, statusCode >= 200 && statusCode <= 299 else {
+                sendError("Your request returned a status code other than 2xx!")
+                return
+            }
+            guard let data = data else {
+                sendError("No data was returned by the request!")
+                return
+            }
+            let _ = data.subdata(in: 5..<data.count)
+            completionHandlerForLogout(true, nil)
+        }
+        task.resume()
+    }
+    
     func displayErrorAlert(_ viewController: UIViewController, title: String) {
         let alert = UIAlertController(title: title, message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
