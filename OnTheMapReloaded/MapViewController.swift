@@ -12,24 +12,15 @@ import MapKit
 class MapViewController: UIViewController {
     
     @IBOutlet weak var mapView: MKMapView!
+    @IBOutlet weak var loadingView: UIView!
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var studentLocations = [StudentLocation]()
     var annotations = [MKPointAnnotation]()
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
         self.mapView.delegate = self
-        ParseClient.sharedInstance.getStudentLocations { (studentLocations, success, errorString) in
-            if let studentLocations = studentLocations {
-                self.createStudentAnnotations(studentLocations)
-            } else {
-                UdacityClient.sharedInstance.displayErrorAlert(self, title: errorString!)
-            }
-        }
+        mapViewIsFinishedLoadingUI(false)
     }
     
     func createStudentAnnotations(_ students: [StudentLocation]) {
@@ -44,6 +35,7 @@ class MapViewController: UIViewController {
             }
         }
         performUIUpdatesOnMain {
+            self.mapViewIsFinishedLoadingUI(true)
             self.mapView.addAnnotations(self.annotations)
         }
     }
@@ -72,6 +64,26 @@ extension MapViewController: MKMapViewDelegate {
             if let toOpen = view.annotation?.subtitle! {
                 app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
             }
+        }
+    }
+    
+    func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
+        ParseClient.sharedInstance.getStudentLocations { (studentLocations, success, errorString) in
+            if let studentLocations = studentLocations {
+                self.createStudentAnnotations(studentLocations)
+            } else {
+                UdacityClient.sharedInstance.displayErrorAlert(self, title: errorString!)
+            }
+        }
+    }
+    
+    func mapViewIsFinishedLoadingUI(_ enabled: Bool) {
+        activityIndicator.isHidden = enabled
+        loadingView.isHidden = enabled
+        if !enabled {
+            activityIndicator.startAnimating()
+        } else {
+            activityIndicator.stopAnimating()
         }
     }
 }

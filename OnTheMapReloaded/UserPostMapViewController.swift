@@ -22,7 +22,6 @@ class UserPostMapViewController: UIViewController {
     }
     
     @IBAction func finishButtonPressed(_ sender: Any) {
-        
     }
     
     func placePinOnMap(_ location: CLPlacemark) {
