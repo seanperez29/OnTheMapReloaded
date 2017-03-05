@@ -10,6 +10,18 @@ import Foundation
 
 extension ParseClient {
     
+    func postStudentLocation(_ uniqueKey: String, firstName: String, lastName: String, mapString: String, mediaURL: String, latitude: Double, longitude: Double, completionHandlerForPostStudent: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
+        let methodParameters: [String:Any] = [ParseClient.JSONParameterKeys.uniqueKey: uniqueKey, ParseClient.JSONParameterKeys.firstName: firstName, ParseClient.JSONParameterKeys.lastName: lastName, ParseClient.JSONParameterKeys.mapString: mapString, ParseClient.JSONParameterKeys.mediaURL: mediaURL, ParseClient.JSONParameterKeys.latitude: latitude, ParseClient.JSONParameterKeys.longitude: longitude]
+        taskForPostMethod(methodParameters as [String : AnyObject]) { (success, error) in
+            if success {
+                completionHandlerForPostStudent(true, nil)
+            } else {
+                completionHandlerForPostStudent(false, "There appears to have been an error: \(error)")
+            }
+        }
+        
+    }
+    
     func getStudentLocations(_ completionHandler: @escaping (_ students: [StudentLocation]?, _ success: Bool, _ errorString: String?) -> Void) {
         let requestParameters = [UdacityClient.JSONRequestKeys.Limit: UdacityClient.JSONRequestValues.Limit100]
         let request = NSMutableURLRequest(url: parseURLFromParameters(requestParameters as [String:AnyObject]))

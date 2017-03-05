@@ -37,6 +37,7 @@ class MakePostViewController: UIViewController {
             let controller  = segue.destination as! UserPostMapViewController
             controller.placemark = placemark
             controller.mediaURL = mediaTextField.text
+            controller.mapString = locationTextField.text
         }
     }
     

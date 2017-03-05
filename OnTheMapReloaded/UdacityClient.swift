@@ -17,6 +17,7 @@ class UdacityClient: NSObject {
     var firstName: String?
     var lastName: String?
     var uniqueID: String?
+    var activeStudent: Student!
     
     func taskForLogout(_ completionHandlerForLogout: @escaping (_ success: Bool, _ errorString: NSError?) -> Void) {
         let request = NSMutableURLRequest(url: URL(string: UdacityClient.Constants.APIBaseURL)!)

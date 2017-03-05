@@ -108,7 +108,7 @@ extension UdacityClient {
             }
             self.firstName = firstName
             self.lastName = lastName
-            let _ = Student(firstName: firstName, lastName: lastName, uniqueID: self.uniqueID!)
+            self.activeStudent = Student(firstName: firstName, lastName: lastName, uniqueID: self.uniqueID!)
             completionHandlerForData(true, nil)
         }
         task.resume()
