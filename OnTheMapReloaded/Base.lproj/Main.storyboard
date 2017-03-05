@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1M1-Qg-Rjj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -289,7 +289,6 @@
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="findLocationPressed:" destination="bZD-Ml-lGb" eventType="touchUpInside" id="80X-Nd-EFb"/>
-                                    <segue destination="eyh-AL-4rF" kind="show" id="fja-rH-Ndp"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -315,6 +314,7 @@
                     <connections>
                         <outlet property="locationTextField" destination="tnW-7G-IrB" id="4F1-PM-2zQ"/>
                         <outlet property="mediaTextField" destination="Wa8-GF-632" id="MSc-Sq-5Mu"/>
+                        <segue destination="eyh-AL-4rF" kind="show" identifier="showMap" id="42R-d8-Oad"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Jzb-zY-l8b" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -336,24 +336,33 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="wrx-ba-0f9">
                                 <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iK1-sR-Hbz">
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iK1-sR-Hbz">
                                 <rect key="frame" x="16" y="607" width="343" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" red="0.015686274510000001" green="0.66274509800000003" blue="0.92156862750000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <state key="normal" title="FINISH">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="finishButtonPressed:" destination="eyh-AL-4rF" eventType="touchUpInside" id="pPK-Qi-UZL"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="23i-Tc-AKS" firstAttribute="top" secondItem="wrx-ba-0f9" secondAttribute="bottom" id="NGv-Cj-qfU"/>
+                            <constraint firstItem="23i-Tc-AKS" firstAttribute="top" secondItem="iK1-sR-Hbz" secondAttribute="bottom" constant="20" id="OHn-gm-p62"/>
                             <constraint firstAttribute="trailing" secondItem="wrx-ba-0f9" secondAttribute="trailing" id="PWf-5C-IJY"/>
+                            <constraint firstItem="iK1-sR-Hbz" firstAttribute="trailing" secondItem="hAL-4C-yWX" secondAttribute="trailingMargin" id="i5d-nD-S6d"/>
+                            <constraint firstItem="iK1-sR-Hbz" firstAttribute="leading" secondItem="hAL-4C-yWX" secondAttribute="leadingMargin" id="qFq-4Y-wGZ"/>
                             <constraint firstItem="wrx-ba-0f9" firstAttribute="top" secondItem="RAj-Gl-SQT" secondAttribute="bottom" id="sQw-td-iAW"/>
                             <constraint firstItem="wrx-ba-0f9" firstAttribute="leading" secondItem="hAL-4C-yWX" secondAttribute="leading" id="z0v-yh-lyz"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="finishButton" destination="iK1-sR-Hbz" id="EJM-1w-5vl"/>
+                        <outlet property="mapView" destination="wrx-ba-0f9" id="5qV-A6-PVg"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XJ0-9U-7ih" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
