@@ -23,6 +23,12 @@ class UserPostMapViewController: UIViewController {
     }
     
     @IBAction func finishButtonPressed(_ sender: Any) {
+        
+        if UdacityClient.sharedInstance.isStudentSignedIn == false {
+            UdacityClient.sharedInstance.displayErrorAlert(self, title: "Please sign in prior to submitting a post")
+            return
+        }
+        
         guard let activeStudent = UdacityClient.sharedInstance.activeStudent else {
             UdacityClient.sharedInstance.displayErrorAlert(self, title: "There appears to be an error. Please try again")
             return

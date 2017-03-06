@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16D32" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="1M1-Qg-Rjj">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -14,7 +14,7 @@
         <!--Login View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="LoginViewController" customModule="OnTheMapReloaded" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginViewController" id="BYZ-38-t0r" customClass="LoginViewController" customModule="OnTheMapReloaded" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -87,10 +87,18 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="pb0-y1-0pO">
                                 <rect key="frame" x="177" y="325" width="20" height="20"/>
                             </activityIndicatorView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="irB-bc-mJn">
+                                <rect key="frame" x="16" y="20" width="48" height="30"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="cancelPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="dIk-Cl-WMC"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="2Gr-5x-K1B" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="56" id="0Dy-cc-wvR"/>
+                            <constraint firstItem="irB-bc-mJn" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="1R0-zi-Ciw"/>
                             <constraint firstItem="xNl-DZ-f6A" firstAttribute="top" secondItem="2Gr-5x-K1B" secondAttribute="bottom" constant="20" id="3JM-ka-G9r"/>
                             <constraint firstItem="04k-n3-oEt" firstAttribute="leading" secondItem="xNl-DZ-f6A" secondAttribute="trailing" constant="4" id="5uJ-T0-VXl"/>
                             <constraint firstItem="xNl-DZ-f6A" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="74" id="7Ai-i9-UfK"/>
@@ -106,6 +114,7 @@
                             <constraint firstItem="04k-n3-oEt" firstAttribute="top" secondItem="2Gr-5x-K1B" secondAttribute="bottom" constant="20" id="c88-oa-BY3"/>
                             <constraint firstItem="rFh-77-QgT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="56" id="ccx-2q-QAb"/>
                             <constraint firstItem="qgt-dz-YUU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="56" id="oRI-Sd-yw3"/>
+                            <constraint firstItem="irB-bc-mJn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="oSH-cZ-0aG"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qgt-dz-YUU" secondAttribute="trailing" constant="57" id="pYn-uK-2ck"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2Gr-5x-K1B" secondAttribute="trailing" constant="57" id="r4G-Ax-jlx"/>
                         </constraints>
@@ -119,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-150" y="139"/>
+            <point key="canvasLocation" x="-151.19999999999999" y="138.98050974512745"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="RFR-Qp-Erz">
@@ -431,7 +440,7 @@
             <objects>
                 <tabBarController id="Btv-qw-0p0" customClass="TabBarController" customModule="OnTheMapReloaded" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" title="On The Map" id="78q-UK-sd0">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="iv6-qp-gRe">
+                        <barButtonItem key="leftBarButtonItem" title="Sign In" id="iv6-qp-gRe">
                             <connections>
                                 <action selector="logoutPressed:" destination="Btv-qw-0p0" id="EPN-JK-BZf"/>
                             </connections>
@@ -455,6 +464,7 @@
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </tabBar>
                     <connections>
+                        <outlet property="signInButton" destination="iv6-qp-gRe" id="7m8-cU-Ett"/>
                         <segue destination="a23-dC-dkN" kind="relationship" relationship="viewControllers" id="5xJ-ua-NZl"/>
                         <segue destination="PDT-fr-7Hr" kind="relationship" relationship="viewControllers" id="sNX-RL-K4k"/>
                     </connections>

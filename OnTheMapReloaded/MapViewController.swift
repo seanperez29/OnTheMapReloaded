@@ -45,7 +45,6 @@ class MapViewController: UIViewController {
         if mapView.annotations.count > 0 {
             mapView.removeAnnotations(mapView.annotations)
             annotations.removeAll(keepingCapacity: true)
-            studentLocations.removeAll(keepingCapacity: true)
             getStudentsAndPlaceOnMap()
         } else {
             getStudentsAndPlaceOnMap()

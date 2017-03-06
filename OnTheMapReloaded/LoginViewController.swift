@@ -52,13 +52,18 @@ class LoginViewController: UIViewController {
         }
     }
     
+    @IBAction func cancelPressed(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
 }
 
 extension LoginViewController {
     
     func completeLogin() {
-        let controller = storyboard?.instantiateViewController(withIdentifier: "rootNavigationController") as! UINavigationController
-        present(controller, animated: true, completion: nil)
+        UdacityClient.sharedInstance.isStudentSignedIn = true
+        dismiss(animated: true, completion: nil)
     }
     
     func setUIEnabled(_ enabled: Bool) {

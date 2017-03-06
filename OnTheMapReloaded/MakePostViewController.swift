@@ -17,7 +17,6 @@ class MakePostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
     }
     
     @IBAction func findLocationPressed(_ sender: Any) {
