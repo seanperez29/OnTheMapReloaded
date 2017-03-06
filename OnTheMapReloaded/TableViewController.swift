@@ -16,6 +16,7 @@ class TableViewController: UITableViewController {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(retrieveAndDisplayStudentPosts), name: NSNotification.Name(rawValue: "didSuccessfullyMakePost"), object: nil)
         retrieveAndDisplayStudentPosts()
+        NotificationCenter.default.addObserver(self, selector: #selector(retrieveAndDisplayStudentPosts), name: NSNotification.Name(rawValue: "reloadData"), object: nil)
     }
     
     func retrieveAndDisplayStudentPosts() {

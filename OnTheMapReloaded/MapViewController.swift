@@ -22,6 +22,7 @@ class MapViewController: UIViewController {
         self.mapView.delegate = self
         mapViewIsFinishedLoadingUI(false)
         NotificationCenter.default.addObserver(self, selector: #selector(setStudentLocationsOnMap), name: NSNotification.Name(rawValue: "didSuccessfullyMakePost"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(reloadData), name: NSNotification.Name(rawValue: "reloadData"), object: nil)
     }
     
     func createStudentAnnotations(_ students: [StudentLocation]) {
@@ -60,6 +61,10 @@ class MapViewController: UIViewController {
                 UdacityClient.sharedInstance.displayErrorAlert(self, title: errorString!)
             }
         }
+    }
+    
+    func reloadData() {
+        setStudentLocationsOnMap()
     }
 
 }
