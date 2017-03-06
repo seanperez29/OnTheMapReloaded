@@ -17,6 +17,9 @@ class MakePostViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = false
+        view.addGestureRecognizer(tap)
     }
     
     @IBAction func findLocationPressed(_ sender: Any) {
@@ -31,15 +34,6 @@ class MakePostViewController: UIViewController {
         let _ = navigationController?.popToRootViewController(animated: true)
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "showMap" {
-            let controller  = segue.destination as! UserPostMapViewController
-            controller.placemark = placemark
-            controller.mediaURL = mediaTextField.text
-            controller.mapString = locationTextField.text
-        }
-    }
-    
     func forwardGeocoding(_ address: String) {
         CLGeocoder().geocodeAddressString(address) { (placemarks, error) in
             if let placemark = placemarks?[0] {
@@ -52,6 +46,20 @@ class MakePostViewController: UIViewController {
                     UdacityClient.sharedInstance.displayErrorAlert(self, title: "Unable to process your location. Please try again!")
                 }
             }
+        }
+    }
+    
+    func dismissKeyboard() {
+        locationTextField.endEditing(true)
+        mediaTextField.endEditing(true)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showMap" {
+            let controller  = segue.destination as! UserPostMapViewController
+            controller.placemark = placemark
+            controller.mediaURL = mediaTextField.text
+            controller.mapString = locationTextField.text
         }
     }
 

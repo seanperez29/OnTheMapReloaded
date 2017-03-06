@@ -16,6 +16,7 @@ class MapViewController: UIViewController {
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     var studentLocations = [StudentLocation]()
     var annotations = [MKPointAnnotation]()
+    var isFirstLoad = true
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -95,7 +96,12 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
-        setStudentLocationsOnMap()
+        if !isFirstLoad {
+            return
+        } else {
+            setStudentLocationsOnMap()
+            isFirstLoad = false
+        }
     }
     
     func mapViewIsFinishedLoadingUI(_ enabled: Bool) {

@@ -14,20 +14,13 @@ class LoginViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         activityIndicator.isHidden = true
-    }
-    
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-        usernameTextField.text = ""
-        passwordTextField.text = ""
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tap.cancelsTouchesInView = true
+        view.addGestureRecognizer(tap)
     }
     
     @IBAction func loginButtonPressed(_ sender: Any) {
@@ -56,6 +49,10 @@ class LoginViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    func dismissKeyboard() {
+        usernameTextField.endEditing(true)
+        passwordTextField.endEditing(true)
+    }
     
 }
 
