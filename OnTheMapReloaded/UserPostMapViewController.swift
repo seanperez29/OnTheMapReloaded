@@ -29,6 +29,7 @@ class UserPostMapViewController: UIViewController {
         }
         ParseClient.sharedInstance.postStudentLocation(activeStudent.uniqueID, firstName: activeStudent.firstName, lastName: activeStudent.lastName, mapString: mapString, mediaURL: mediaURL, latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude) { (success, errorString) in
             if success {
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didSuccessfullyMakePost"), object: nil)
                 let _ = self.navigationController?.popToRootViewController(animated: true)
             } else {
                 UdacityClient.sharedInstance.displayErrorAlert(self, title: "There was an error submitting your post. Please try again")

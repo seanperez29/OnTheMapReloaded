@@ -21,6 +21,7 @@ class MapViewController: UIViewController {
         super.viewDidLoad()
         self.mapView.delegate = self
         mapViewIsFinishedLoadingUI(false)
+        NotificationCenter.default.addObserver(self, selector: #selector(setStudentLocationsOnMap), name: NSNotification.Name(rawValue: "didSuccessfullyMakePost"), object: nil)
     }
     
     func createStudentAnnotations(_ students: [StudentLocation]) {
@@ -37,6 +38,26 @@ class MapViewController: UIViewController {
         performUIUpdatesOnMain {
             self.mapViewIsFinishedLoadingUI(true)
             self.mapView.addAnnotations(self.annotations)
+        }
+    }
+    
+    func setStudentLocationsOnMap() {
+        if !(annotations.isEmpty) {
+         self.mapView.removeAnnotations(annotations)
+            getStudentsAndPlaceOnMap()
+        } else {
+            getStudentsAndPlaceOnMap()
+        }
+    }
+    
+    func getStudentsAndPlaceOnMap() {
+        ParseClient.sharedInstance.getStudentLocations { (studentLocations, success, errorString) in
+            if let studentLocations = studentLocations {
+                UdacityClient.sharedInstance.studentLocations = studentLocations
+                self.createStudentAnnotations(studentLocations)
+            } else {
+                UdacityClient.sharedInstance.displayErrorAlert(self, title: errorString!)
+            }
         }
     }
 
@@ -68,13 +89,7 @@ extension MapViewController: MKMapViewDelegate {
     }
     
     func mapViewDidFinishRenderingMap(_ mapView: MKMapView, fullyRendered: Bool) {
-        ParseClient.sharedInstance.getStudentLocations { (studentLocations, success, errorString) in
-            if let studentLocations = studentLocations {
-                self.createStudentAnnotations(studentLocations)
-            } else {
-                UdacityClient.sharedInstance.displayErrorAlert(self, title: errorString!)
-            }
-        }
+        setStudentLocationsOnMap()
     }
     
     func mapViewIsFinishedLoadingUI(_ enabled: Bool) {

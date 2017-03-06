@@ -13,6 +13,7 @@ class Student {
     private let _firstName: String
     private let _lastName: String
     private let _uniqueID: String
+    var doesPostAlreadyExist = false
     
     var firstName: String {
         return _firstName
