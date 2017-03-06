@@ -12,8 +12,8 @@ class TabBarController: UITabBarController {
     
     @IBOutlet weak var signInButton: UIBarButtonItem!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         if UdacityClient.sharedInstance.isStudentSignedIn {
             signInButton.title = "Logout"
         } else {
@@ -34,7 +34,10 @@ class TabBarController: UITabBarController {
             UdacityClient.sharedInstance.taskForLogout { (success, error) in
                 if success {
                     performUIUpdatesOnMain {
-                        self.dismiss(animated: true, completion: nil)
+                        self.signInButton.title = "Sign In"
+                        UdacityClient.sharedInstance.activeStudent = nil
+                        UdacityClient.sharedInstance.isStudentSignedIn = false
+                        UdacityClient.sharedInstance.displayErrorAlert(self, title: "You have successfully logged out")
                     }
                 } else {
                     performUIUpdatesOnMain {

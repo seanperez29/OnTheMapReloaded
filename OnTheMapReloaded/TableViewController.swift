@@ -14,11 +14,11 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(viewDidAppear(_:)), name: NSNotification.Name(rawValue: "didSuccessfullyMakePost"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(retrieveAndDisplayStudentPosts), name: NSNotification.Name(rawValue: "didSuccessfullyMakePost"), object: nil)
+        retrieveAndDisplayStudentPosts()
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+    func retrieveAndDisplayStudentPosts() {
         ParseClient.sharedInstance.getStudentLocations { (studentLocations, success, errorString) in
             if let studentLocations = studentLocations {
                 self.studentLocations = studentLocations
@@ -30,7 +30,6 @@ class TableViewController: UITableViewController {
             }
         }
     }
-
 }
 
 extension TableViewController {
