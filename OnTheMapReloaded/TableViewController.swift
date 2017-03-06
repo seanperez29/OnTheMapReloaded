@@ -14,6 +14,7 @@ class TableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(viewDidAppear(_:)), name: NSNotification.Name(rawValue: "didSuccessfullyMakePost"), object: nil)
     }
     
     override func viewDidAppear(_ animated: Bool) {

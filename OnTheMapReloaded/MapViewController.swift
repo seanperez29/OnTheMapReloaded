@@ -42,8 +42,10 @@ class MapViewController: UIViewController {
     }
     
     func setStudentLocationsOnMap() {
-        if !(annotations.isEmpty) {
-         self.mapView.removeAnnotations(annotations)
+        if mapView.annotations.count > 0 {
+            mapView.removeAnnotations(mapView.annotations)
+            annotations.removeAll(keepingCapacity: true)
+            studentLocations.removeAll(keepingCapacity: true)
             getStudentsAndPlaceOnMap()
         } else {
             getStudentsAndPlaceOnMap()

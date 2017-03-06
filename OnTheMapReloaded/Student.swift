@@ -14,6 +14,7 @@ class Student {
     private let _lastName: String
     private let _uniqueID: String
     var doesPostAlreadyExist = false
+    var objectID: String?
     
     var firstName: String {
         return _firstName

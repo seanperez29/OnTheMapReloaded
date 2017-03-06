@@ -21,7 +21,7 @@ class StudentLocation {
     var longitude: CLLocationDegrees?
     
     init(dictionary: [String:AnyObject]) {
-        objectID = dictionary["mapString"] as? String
+        objectID = dictionary["objectId"] as? String
         uniqueKey = dictionary["uniqueId"] as? String
         firstName = dictionary["firstName"] as? String
         lastName = dictionary["lastName"] as? String

@@ -32,6 +32,7 @@ class TabBarController: UITabBarController {
         for student in UdacityClient.sharedInstance.studentLocations {
             if (student.firstName == UdacityClient.sharedInstance.activeStudent.firstName) && (student.lastName == UdacityClient.sharedInstance.activeStudent.lastName) {
                 UdacityClient.sharedInstance.activeStudent.doesPostAlreadyExist = true
+                UdacityClient.sharedInstance.activeStudent.objectID = student.objectID
                 let alert = UIAlertController(title: "You have already made a post", message: "Do you want to overwrite previous post?", preferredStyle: .alert)
                 let overwriteAction = UIAlertAction(title: "Overwrite", style: .default, handler: { (_) in
                     self.navigateToMakePostViewController()
