@@ -71,7 +71,11 @@ extension UdacityClient {
     }
     
     func getUserData(_ completionHandlerForData: @escaping (_ success: Bool, _ errorString: String?) -> Void) {
-        let request = NSMutableURLRequest(url: udacityURLFromParameters(nil, withPathExtension: "/users/\(uniqueID!)"))
+        guard let uniqueID = uniqueID else {
+            completionHandlerForData(false, "There was an error obtaining a uniqueID")
+            return
+        }
+        let request = NSMutableURLRequest(url: udacityURLFromParameters(nil, withPathExtension: "/users/\(uniqueID)"))
         let session = URLSession.shared
         let task = session.dataTask(with: request as URLRequest) { (data, response, error) in
             guard (error == nil) else {
@@ -106,9 +110,7 @@ extension UdacityClient {
                 completionHandlerForData(false, "Error obtaining las name")
                 return
             }
-            self.firstName = firstName
-            self.lastName = lastName
-            self.activeStudent = Student(firstName: firstName, lastName: lastName, uniqueID: self.uniqueID!)
+            self.activeStudent = Student(firstName: firstName, lastName: lastName, uniqueID: uniqueID)
             completionHandlerForData(true, nil)
         }
         task.resume()

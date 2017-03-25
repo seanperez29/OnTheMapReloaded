@@ -89,8 +89,18 @@ extension MapViewController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, calloutAccessoryControlTapped control: UIControl) {
         if control == view.rightCalloutAccessoryView {
             let app = UIApplication.shared
-            if let toOpen = view.annotation?.subtitle! {
-                app.open(URL(string: toOpen)!, options: [:], completionHandler: nil)
+            guard let subtitle = view.annotation?.subtitle else {
+                UdacityClient.sharedInstance.displayErrorAlert(self, title: "Student has no url to share")
+                return
+            }
+            guard let url = URL(string: subtitle!) else {
+                UdacityClient.sharedInstance.displayErrorAlert(self, title: "Invalid URL shared by student.")
+                return
+            }
+            if app.canOpenURL(url) {
+                app.open(url, options: [:], completionHandler: nil)
+            } else {
+                UdacityClient.sharedInstance.displayErrorAlert(self, title: "Unable to open provided url. Does not contain proper http:// prefix.")
             }
         }
     }

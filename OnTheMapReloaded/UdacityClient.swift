@@ -14,10 +14,8 @@ class UdacityClient: NSObject {
     static let sharedInstance = UdacityClient()
     var session = URLSession.shared
     var sessionID: String?
-    var firstName: String?
-    var lastName: String?
     var uniqueID: String?
-    var activeStudent: Student!
+    var activeStudent: Student?
     var studentLocations = [StudentLocation]()
     var isStudentSignedIn = false
     

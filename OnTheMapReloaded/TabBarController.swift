@@ -52,22 +52,30 @@ class TabBarController: UITabBarController {
         if UdacityClient.sharedInstance.isStudentSignedIn == false {
             navigateToMakePostViewController()
         } else {
+            guard let activeStudent = UdacityClient.sharedInstance.activeStudent else {
+                UdacityClient.sharedInstance.displayErrorAlert(self, title: "There appears to be an error. Please try again")
+                return
+            }
             for student in UdacityClient.sharedInstance.studentLocations {
-                if (student.firstName == UdacityClient.sharedInstance.activeStudent.firstName) && (student.lastName == UdacityClient.sharedInstance.activeStudent.lastName) {
-                    UdacityClient.sharedInstance.activeStudent.doesPostAlreadyExist = true
-                    UdacityClient.sharedInstance.activeStudent.objectID = student.objectID
-                    let alert = UIAlertController(title: "You have already made a post", message: "Do you want to overwrite previous post?", preferredStyle: .alert)
-                    let overwriteAction = UIAlertAction(title: "Overwrite", style: .default, handler: { (_) in
-                        self.navigateToMakePostViewController()
-                    })
-                    let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-                    alert.addAction(overwriteAction)
-                    alert.addAction(cancelAction)
-                    present(alert, animated: true, completion: nil)
+                if (student.firstName == activeStudent.firstName) && (student.lastName == activeStudent.lastName) {
+                    activeStudent.doesPostAlreadyExist = true
+                    activeStudent.objectID = student.objectID
+                    showPostAlert()
                 }
             }
             navigateToMakePostViewController()
         }
+    }
+    
+    func showPostAlert() {
+        let alert = UIAlertController(title: "You have already made a post", message: "Do you want to overwrite previous post?", preferredStyle: .alert)
+        let overwriteAction = UIAlertAction(title: "Overwrite", style: .default, handler: { (_) in
+            self.navigateToMakePostViewController()
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        alert.addAction(overwriteAction)
+        alert.addAction(cancelAction)
+        present(alert, animated: true, completion: nil)
     }
     
     func navigateToMakePostViewController() {

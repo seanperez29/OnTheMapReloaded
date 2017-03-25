@@ -28,13 +28,12 @@ class UserPostMapViewController: UIViewController {
             UdacityClient.sharedInstance.displayErrorAlert(self, title: "Please sign in prior to submitting a post")
             return
         }
-        
         guard let activeStudent = UdacityClient.sharedInstance.activeStudent else {
             UdacityClient.sharedInstance.displayErrorAlert(self, title: "There appears to be an error. Please try again")
             return
         }
         
-        if UdacityClient.sharedInstance.activeStudent.doesPostAlreadyExist {
+        if activeStudent.doesPostAlreadyExist {
             ParseClient.sharedInstance.updateStudentLocation(activeStudent.uniqueID, firstName: activeStudent.firstName, lastName: activeStudent.lastName, mapString: mapString, mediaURL: mediaURL, latitude: placemark.location!.coordinate.latitude, longitude: placemark.location!.coordinate.longitude, completionHandlerForUdpateStudentLocation: { (success, errorString) in
                 if success {
                     NotificationCenter.default.post(name: NSNotification.Name(rawValue: "didSuccessfullyMakePost"), object: nil)

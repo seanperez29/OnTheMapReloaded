@@ -13,7 +13,11 @@ class ParseClient {
     let session = URLSession.shared
     
     func taskForUpdateMethod(_ methodParameters: [String:AnyObject], completionHandlerForTaskForUpdate: @escaping (_ success: Bool, _ error: NSError?) -> Void) {
-        let request = NSMutableURLRequest(url: URL(string: "\(ParseClient.Constants.BaseURL)/\(UdacityClient.sharedInstance.activeStudent.objectID!)")!)
+        guard let activeStudent = UdacityClient.sharedInstance.activeStudent, let objectID = activeStudent.objectID else {
+            completionHandlerForTaskForUpdate(false, NSError(domain: "taskForUpdateMethod", code: 0, userInfo: [NSLocalizedDescriptionKey: "There appears to be an error. Please try again"]))
+            return
+        }
+        let request = NSMutableURLRequest(url: URL(string: "\(ParseClient.Constants.BaseURL)/\(objectID)")!)
         request.httpMethod = "PUT"
         request.addValue("QrX47CA9cyuGewLdsL7o5Eb8iug6Em8ye0dnAbIr", forHTTPHeaderField: "X-Parse-Application-Id")
         request.addValue("QuWThTdiRmTux3YaDseUSEpUKo7aBYM737yKd4gY", forHTTPHeaderField: "X-Parse-REST-API-Key")

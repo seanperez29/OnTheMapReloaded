@@ -49,6 +49,16 @@ class LoginViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func udacitySignUp(sender: UIButton) {
+        guard let url = URL(string: UdacityClient.Constants.UdacitySignupURL) else {
+            UdacityClient.sharedInstance.displayErrorAlert(self, title: "Unable to obtain url")
+            return
+        }
+        if UIApplication.shared.canOpenURL(url) {
+            UIApplication.shared.open(url, options: [:], completionHandler: nil)
+        }
+    }
+    
     func dismissKeyboard() {
         usernameTextField.endEditing(true)
         passwordTextField.endEditing(true)
